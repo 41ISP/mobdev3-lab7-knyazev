@@ -5,17 +5,27 @@ function handleButton(button) {
 
   // Обработка разных типов кнопок
   if (value === '=') {
-    const input = disp.textContent
-    const res = eval(input.replaceAll("×", "*").replaceAll("−", "-").replaceAll("÷", "/"))
-    disp.textContent = res
-  } else if (value === 'AC') {
+    if(disp.textContent.includes("%")){
+      const numbers = disp.textContent.split("%")
+      const res = (numbers[0] / 100) * numbers[1]
+      disp.textContent = res
+    } else{
+      const input = disp.textContent
+      disp.textContent = eval(disp.textContent.replaceAll("×", "*").replaceAll("−", "-").replaceAll("÷", "/"))
+      disp.textContent = res
+    }
+}else if (value === "%"){
+    disp.textContent = eval(disp.textContent.replaceAll("×", "*").replaceAll("−", "-").replaceAll("÷", "/")) + "%"
+  }
+  else if (value === 'AC') {
     disp.textContent = 0
   } else if (value === "+/-") {
     disp.textContent = disp.textContent.replaceAll("−", "-") * -1
   }
   else if (disp.textContent == "0") {
     disp.textContent = value
-  } else {
+  } 
+  else {
     disp.textContent += value
   }
 
